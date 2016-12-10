@@ -7,24 +7,20 @@
 import java.applet.Applet;
  import java.awt.Graphics;
 import java.awt.GridLayout;
-/**
- *
- * @author dimon
- */
+import javax.swing.JTable;
+
 public class Race extends Applet implements Runnable {
    
- 
- 
-  
-    Racer theRacers[]; //массив гонщиков
-    static int count=3; //количество гонщиков
-    Thread theThreads[]; //массив потоков
-    Thread thisThread; //основной поток (поток, который управляет другими потоками)
+    Racer theRacers[]; 
+    static int count=5;
+    Thread theThreads[]; 
+    Thread thisThread; 
     static boolean inApplet=true;
-    int numberOfTheradAtStart; //в конце программы при помощи этой переменной
-                               //определяем, все ли потоки прекратили существование
+    int numberOfTheradAtStart; 
+                               
    
     public void init() {
+        
         numberOfTheradAtStart=Thread.activeCount();
        
         //определеяем расположение гонщиков в окне,
@@ -57,7 +53,7 @@ public class Race extends Applet implements Runnable {
     public void run() {
    
         // цикл, пока все гонщики не закончат гонку
-        while(Thread.activeCount()>numberOfTheradAtStart+2) {
+        while(Thread.activeCount()>numberOfTheradAtStart) {
             try {
                 thisThread.sleep(100);
             } catch (InterruptedException e) {
@@ -65,10 +61,7 @@ public class Race extends Applet implements Runnable {
             }
         }
        
-        if(inApplet) {
-            stop();
-            destroy();
-        } else System.exit(0);
+     
     }
    
   //  public static void main(String argv[]) {
@@ -79,9 +72,6 @@ public class Race extends Applet implements Runnable {
       //  theRace.start();
       // System.out.println("d");
   //}
-      @Override
-         public void paint(Graphics g) {
-             g.drawString("Hello applet!", 50, 25);
-         }
+      
 }
    
